@@ -42,8 +42,8 @@ public class playerControls : MonoBehaviour
         }
         if ((ySpeed != 0) && (xSpeed != 0))
         {
-            ySpeed = Sqrt(2) / ySpeed;
-            xSpeed = Sqrt(2) / xSpeed;
+            ySpeed = 14;
+            xSpeed = 14;
         }
 
         rb.velocity = new Vector2(xSpeed, ySpeed);
