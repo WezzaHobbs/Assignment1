@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class playerControls : MonoBehaviour
 {
+    int powerUp = 5000; //Power Up length (in milliseconds)
     Rigidbody2D rb;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim.SetBool("powered", false);
     }
     // Update is called once per frame
     void Update()
@@ -16,11 +19,11 @@ public class playerControls : MonoBehaviour
         int speed = 20;
         int ySpeed;
         int xSpeed;
-        if(Input.GetKey("w"))
+        if(Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
         {
             ySpeed = speed;
         }
-        else if (Input.GetKey("s"))
+        else if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
         {
             ySpeed = -speed;
         }
@@ -28,11 +31,11 @@ public class playerControls : MonoBehaviour
         {
             ySpeed = 0;
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             xSpeed = speed;
         }
-        else if (Input.GetKey("a"))
+        else if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
             xSpeed = -speed;
         }
@@ -40,12 +43,43 @@ public class playerControls : MonoBehaviour
         {
             xSpeed = 0;
         }
-        if ((ySpeed != 0) && (xSpeed != 0))
+        if ((ySpeed > 0) && (xSpeed > 0))
         {
             ySpeed = 14;
             xSpeed = 14;
         }
+        else if ((ySpeed < 0) && (xSpeed < 0))
+        {
+            ySpeed = -14;
+            xSpeed = -14;
+        }
+        else if ((ySpeed > 0) && (xSpeed < 0))
+        {
+            ySpeed = 14;
+            xSpeed = -14;
+        }
+        else if ((ySpeed < 0) && (xSpeed > 0))
+        {
+            ySpeed = -14;
+            xSpeed = 14;
+        }
 
         rb.velocity = new Vector2(xSpeed, ySpeed);
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Respawn");
+            transform.position = new Vector3(-10.3f, -3.82f, 0);
+        }
+        if (collision.gameObject.tag == "Wall")
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+        if (collision.gameObject.tag == "Finish")
+        {
+            transform.position = new Vector3(1.4f, 8.27f, 0);
+        }
     }
 }
