@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class playerControls : MonoBehaviour
 {
-    int powerUp = 5000; //Power Up length (in milliseconds)
     Rigidbody2D rb;
     Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim.SetBool("powered", false);
     }
     // Update is called once per frame
     void Update()
