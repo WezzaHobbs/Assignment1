@@ -71,7 +71,7 @@ public class playerControls : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Respawn");
-            transform.position = new Vector3(-10.3f, -3.82f, 0);
+            transform.position = new Vector3(-9.416f, -3.82f, 0);
         }
         if (collision.gameObject.tag == "Wall")
         {

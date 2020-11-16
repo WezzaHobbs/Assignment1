@@ -6,15 +6,11 @@ public class enemyBehaviour : MonoBehaviour
 {
     Rigidbody2D rb;
     int speed;
-    int timeToChange;
-    int timer;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         speed = -3;
-        timeToChange = 1200;
-        timer = timeToChange - 30; //in frames (60fps)
     }
 
     // Update is called once per frame
